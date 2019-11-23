@@ -37,7 +37,7 @@ make go-build
 6. Ejecutar archivo binario
 
 ```
-go-shell
+make go-shell
 ```
 
 ### Ejecutar mediante contenedor local
@@ -45,26 +45,21 @@ go-shell
 * Construir imagen Docker 
 
 ```
-docker build -t go-kubernetes .
+make docker-build
 ```
 
 * Tag 
 
 ```
-docker tag go-kubernetes pablon27/go-hello-world:1.0.0
+make docker-tag
 ```
 
 * Run
 
 ```
-docker run -p 8080:8080 pablon27/go-hello-world:1.0.0
+make docker-run
 ```
 
-* Subir imagen a Docker Hub 
-
-```
-docker push pablon27/go-hello-world:1.0.0
-```
 
 ## Kubernetes 
 
