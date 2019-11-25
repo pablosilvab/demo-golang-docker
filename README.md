@@ -66,9 +66,6 @@ make docker-run
 * Deployment 
 
 ```
-kubectl apply -f k8s-deployment.yml
+kubectl apply -f golang-docker.yaml
 ```
 
-```
-kubectl port-forward go-hello-world-dc8589f96-qdsk7 8080:8080
-```
