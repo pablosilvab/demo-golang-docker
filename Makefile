@@ -6,10 +6,7 @@ docker-push:
 	docker push ${USER_HUB}/${APP_NAME}:${APP_VERSION}
 
 docker-build: 
-	docker build -t ${APP_NAME} .
-
-docker-tag:
-	docker tag ${APP_NAME} ${USER_HUB}/${APP_NAME}:${APP_VERSION}
+	docker build -t ${USER_HUB}/${APP_NAME}:${APP_VERSION} .
 
 docker-run:
 	docker run -p 8080:8080 ${USER_HUB}/${APP_NAME}:${APP_VERSION}
