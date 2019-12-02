@@ -69,3 +69,14 @@ make docker-run
 kubectl apply -f golang-docker.yaml
 ```
 
+* Expose service
+
+```
+kubectl expose deployment golang-docker-deployment --type=LoadBalancer --port=8080
+```
+
+* Minikube 
+
+```
+minikube service golang-docker-deployment
+```
