@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: golang-docker-deployment
+  name: golang-docker
   labels:
     app: golang-docker
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: golang-docker

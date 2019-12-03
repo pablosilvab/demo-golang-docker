@@ -66,7 +66,7 @@ make docker-run
 * Deployment 
 
 ```
-kubectl apply -f golang-docker.yaml
+kubectl apply -f deployments/deploy-golang-app.yaml
 ```
 
 * Expose service
