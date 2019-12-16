@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: golang-docker-v1-svc
+spec:
+  selector:
+    app: golang-docker
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080

@@ -66,10 +66,16 @@ make docker-run
 * Deployment 
 
 ```
-kubectl apply -f deployments/deploy-golang-app.yaml
+kubectl apply -f deployments/00-deploy.yaml
 ```
 
-* Expose service
+* Service 
+
+```
+kubectl apply -f deployments/01-service.yaml
+```
+
+* Expose 
 
 ```
 kubectl expose deployment golang-docker-deployment --type=LoadBalancer --port=8080

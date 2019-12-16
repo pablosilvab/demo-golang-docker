@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golang-docker
+  labels:
+    app: golang-docker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: golang-docker
+  template:
+    metadata:
+      labels:
+        app: golang-docker
+    spec:
+      containers:
+      - name: golang-docker
+        image: pablon27/golang-docker
+        ports:
+        - containerPort: 80
