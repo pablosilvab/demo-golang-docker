@@ -1,4 +1,4 @@
-image: docker:stable
+image: docker:19.03.0
 
 stages:
   - build
@@ -10,13 +10,13 @@ variables:
   KUBECONFIG: /etc/deploy/config
 
 services:
-  - docker:19.03.1-dind
+  - docker:19.03.0-dind
 
 build:
   stage: build
   before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
     - docker info
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE":"$CI_COMMIT_SHA" .
     - docker push "$CI_REGISTRY_IMAGE"
