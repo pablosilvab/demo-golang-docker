@@ -2,6 +2,9 @@ APP_NAME = demo-golang-docker
 APP_VERSION = 0.0.1.SNAPSHOT
 USER_HUB = pablon27
 
+helm-purge:
+	helm delete --purge demo-golang-docker
+
 helm-upgrade:
 	helm upgrade --install demo-golang-docker ./charts/
 
