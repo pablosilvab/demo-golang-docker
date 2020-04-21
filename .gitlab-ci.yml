@@ -1,7 +1,7 @@
+image: docker:stable
+
 stages:
   - build
-
-image: docker:19.03.1
 
 variables:
   DOCKER_HOST: tcp://localhost:2375
