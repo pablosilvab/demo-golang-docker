@@ -2,6 +2,7 @@ image: docker:stable
 
 stages:
   - build
+  - deploy
 
 variables:
   DOCKER_HOST: tcp://localhost:2375
@@ -18,3 +19,9 @@ build:
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE":"$CI_COMMIT_SHA" .
     - docker push "$CI_REGISTRY_IMAGE"
+
+deploy:
+  stage: deploy
+  image: bitnami/kubectl
+  script:
+    - make helm-install
