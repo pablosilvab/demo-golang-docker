@@ -110,3 +110,17 @@ Listar releases:
 ```
 helm ls --all
 ```
+
+## Issues
+
+### Deploy 
+
+* Cannot connect to the Docker daemon at tcp://localhost:2375. Is the docker daemon running?
+
+Revisar archivo ```.gitlab-ci.yml```. Las versiones son importantes, tanto la imagen Docker como las variables definidas.
+
+### Helm install
+
+* User "system:serviceaccount:default:default" cannot get at the cluster 
+
+Conceder permisos con un ```ClusterRoleBinding```.
