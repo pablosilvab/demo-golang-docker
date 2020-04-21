@@ -13,13 +13,11 @@
 #     DOCKER_HOST: tcp://localhost:2375
 #     DOCKER_TLS_CERTDIR: ""
 
-before_script:
-  - echo $KUBECONFIG
-  
 deploy:
   stage: deploy
   image: 
     name: bitnami/kubectl
+    entrypoint: [""]  
   script:
     - kubectl get deployment demo-golang-docker || kubectl create deployment demo-golang-docker --image="$CI_REGISTRY_IMAGE":0.0.2.SNAPSHOT
     - kubectl set image deployment/demo-golang-docker demo-golang-docker="$CI_REGISTRY_IMAGE":0.0.2.SNAPSHOT
