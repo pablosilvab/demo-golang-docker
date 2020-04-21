@@ -21,9 +21,7 @@ build:
     - docker push "$CI_REGISTRY_IMAGE"
 
 before_script:
-  - sudo mkdir ~/.kube/
-  - echo $KUBECONFIG | base64 -d > config
-  - mv config ~/.kube/
+  - echo $KUBECONFIG | base64 -d 
 
 deploy:
   stage: deploy
