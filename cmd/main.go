@@ -37,7 +37,7 @@ func main() {
 
 	r.HandleFunc("/", handler)
 	r.HandleFunc("/health", healthHandler)
-	r.HandleFunc("/readiness", readinessHandler)
+	r.HandleFunc("/ready", readinessHandler)
 
 	srv := &http.Server{
 		Handler:      r,

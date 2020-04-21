@@ -81,8 +81,32 @@ kubectl apply -f deployments/01-service.yaml
 kubectl expose deployment golang-docker-deployment --type=LoadBalancer --port=8080
 ```
 
-* Minikube 
+## Helm 
 
+### Requisitos
+
+* Tener Helm instaldo en tu máquina.
+* Tener Tiller instalado en tu cluster.
+* El usuario debe tener permisos para poder desplegar.
+
+
+Instalar paquete en Kubernetes: 
 ```
-minikube service golang-docker-deployment
+helm install --name demo-golang-docker ./charts/
+helm install --replace --name demo-golang-docker ./charts 
+```
+
+Eliminar release de Kubernetes:
+```
+helm delete demo-golang-docker
+```
+
+Reinstalar release:
+```
+helm delete demo-golang-docker && helm install --replace --name demo-golang-docker
+```
+
+Listar releases:
+```
+helm ls --all
 ```
