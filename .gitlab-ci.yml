@@ -8,6 +8,7 @@ variables:
   DOCKER_HOST: tcp://localhost:2375
   DOCKER_DRIVER: overlay2
   DOCKER_TLS_CERTDIR: ""
+  KUBECONFIG: /etc/deploy/config
 
 services:
   - docker:19.03.0-dind
@@ -19,10 +20,6 @@ build:
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE":"$CI_COMMIT_SHA" .
     - docker push "$CI_REGISTRY_IMAGE"
-  when: manual
-
-before_script:
-  - echo $KUBECONFIG | base64 -d 
 
 deploy:
   stage: deploy
