@@ -25,5 +25,5 @@ deploy:
   stage: deploy
   image: bitnami/kubectl
   script:
-    - make helm-install
+    - helm install --name demo-golang-docker ./charts/
   when: manual
