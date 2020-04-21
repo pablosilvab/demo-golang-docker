@@ -26,6 +26,7 @@ deploy_review:
     stage: deploy
     image: devth/helm
     script:
+        - helm version
         - init_helm
         - helm upgrade
           --install
