@@ -26,6 +26,9 @@ deploy:
   image: 
     name: bitnami/kubectl
     entrypoint: [""]
+  before_script:
+    - pwd
+    - kubectl version 
   script:
     - kubectl get deployment demo-golang-docker || kubectl create deployment demo-golang-docker --image="$CI_REGISTRY_IMAGE":"$CI_COMMIT_SHA"
     - kubectl set image deployment/demo-golang-docker demo-golang-docker"$CI_REGISTRY_IMAGE":"$CI_COMMIT_SHA"
