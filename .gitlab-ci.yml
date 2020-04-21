@@ -32,4 +32,5 @@ deploy_review:
           --install
           --wait
           --force
+          demo-golang-docker
           ./charts

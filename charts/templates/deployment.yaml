@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "charts.fullname" . }}
+  name: {{ include "charts.name" . }}
   labels:
 {{ include "charts.labels" . | indent 4 }}
 spec:
