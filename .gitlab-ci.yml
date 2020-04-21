@@ -1,7 +1,8 @@
 image: docker:19.03.0
 
 stages:
-  - deploy-helm
+  - build
+  - deploy
 
 variables:
   DOCKER_HOST: tcp://localhost:2375
@@ -33,8 +34,3 @@ deploy:
     - kubectl set image deployment/demo-golang-docker demo-golang-docker="$CI_REGISTRY_IMAGE":"$CI_COMMIT_SHA"
   when: manual
 
-deploy-helm:
-  stage: deploy-helm
-  script:
-    - helm version
-  when: manual
