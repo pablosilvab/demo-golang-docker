@@ -27,7 +27,7 @@ deploy_review:
     image: devth/helm
     script:
         - helm version
-        - init_helm
+        - helm init
         - helm upgrade
           --install
           --wait
