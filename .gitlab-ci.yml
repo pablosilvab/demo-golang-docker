@@ -38,7 +38,7 @@ deploy:
     - mkdir -p $HOME/.kube
     - cat $KUBECONFIG_K > $HOME/.kube/config 
     - export KUBECONFIG=$HOME/.kube/config
-    - kubectl config view
+    - make helm-install
 
 # docker-build:
 #   # Official docker image.
