@@ -24,12 +24,9 @@ build:
 
 deploy:
   stage: deploy
-  image: linkyard/docker-helm
+  image: devth/helm
   script:
-    - helm init --upgrade
-    - helm repo add stable https://kubernetes-charts.storage.googleapis.com
-    - helm upgrade --install demo-golang-docker --namespace default --wait --set image.tag=${CI_COMMIT_SHA} --set replicaCount=2 ./charts
-
+      - helm install --set name=demo-golang-docker demo-golang-docker ./charts
 
 # docker-build:
 #   # Official docker image.
