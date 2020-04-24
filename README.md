@@ -124,3 +124,9 @@ Revisar archivo ```.gitlab-ci.yml```. Las versiones son importantes, tanto la im
 * User "system:serviceaccount:default:default" cannot get at the cluster 
 
 Conceder permisos con un ```ClusterRoleBinding```.
+
+### Creación de charts
+
+```
+helm create charts
+```
