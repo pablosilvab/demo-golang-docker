@@ -16,7 +16,6 @@ build:
   script:
     - echo "Building Dockerfile-based application..."
     - docker build -t "$CI_REGISTRY_IMAGE":"$CI_COMMIT_SHA" .
-    - echo "username is $CI_REGISTRY_USER and password is $CI_REGISTRY_PASSWORD"
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     - echo "Pushing to the Container Registry..."
     - docker push ${CI_REGISTRY_IMAGE}
