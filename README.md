@@ -81,8 +81,52 @@ kubectl apply -f deployments/01-service.yaml
 kubectl expose deployment golang-docker-deployment --type=LoadBalancer --port=8080
 ```
 
-* Minikube 
+## Helm 
+
+### Requisitos
+
+* Tener Helm instaldo en tu máquina.
+* Tener Tiller instalado en tu cluster.
+* El usuario debe tener permisos para poder desplegar.
+
+
+Instalar paquete en Kubernetes: 
+```
+helm install --name demo-golang-docker ./charts/
+helm install --replace --name demo-golang-docker ./charts 
+```
+
+Eliminar release de Kubernetes:
+```
+helm delete demo-golang-docker
+```
+
+Reinstalar release:
+```
+helm delete demo-golang-docker && helm install --replace --name demo-golang-docker
+```
+
+Listar releases:
+```
+helm ls --all
+```
+
+## Issues
+
+### Deploy 
+
+* Cannot connect to the Docker daemon at tcp://localhost:2375. Is the docker daemon running?
+
+Revisar archivo ```.gitlab-ci.yml```. Las versiones son importantes, tanto la imagen Docker como las variables definidas.
+
+### Helm install
+
+* User "system:serviceaccount:default:default" cannot get at the cluster 
+
+Conceder permisos con un ```ClusterRoleBinding```.
+
+### Creación de charts
 
 ```
-minikube service golang-docker-deployment
+helm create charts
 ```

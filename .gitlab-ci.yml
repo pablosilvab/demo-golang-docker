@@ -1,0 +1,78 @@
+stages:
+  - build
+  - deploy
+  
+variables:
+  DOCKER_PRIVILEGED: "true"
+  DOCKER_DRIVER: "overlay"
+  DOCKER_HOST: tcp://localhost:2375
+  DOCKER_TLS_CERTDIR: ""
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+  - docker:dind
+  script:
+    - echo "Building Dockerfile-based application..."
+    - docker build -t "$CI_REGISTRY_IMAGE":"$CI_COMMIT_SHA" .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - echo "Pushing to the Container Registry..."
+    - docker push ${CI_REGISTRY_IMAGE}
+
+
+deploy:
+  stage: deploy
+  image: docker:latest
+  before_script:
+    - apk add --update curl && rm -rf /var/cache/apk/*
+    - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl 
+    - chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl
+    - apk add --no-cache git
+    - apk add make
+    - apk add --no-cache bash
+    - apk add --no-cache curl
+    - apk add --no-cache openssl
+  script: 
+    - curl -L https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash;
+    - mkdir -p $HOME/.kube
+    - cat $KUBECONFIG_K > $HOME/.kube/config 
+    - export KUBECONFIG=$HOME/.kube/config
+    - make helm-install
+
+# docker-build:
+#   # Official docker image.
+#   image: docker:latest
+#   stage: build
+#   services:
+#     - docker:dind
+#   before_script:
+#     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+#   script:
+#     - docker build --pull -t "$CI_REGISTRY_IMAGE":"$CI_COMMIT_SHA" .
+#     - docker push "$CI_REGISTRY_IMAGE"
+#   variables:
+#     DOCKER_HOST: tcp://localhost:2375
+#     DOCKER_TLS_CERTDIR: ""
+
+# deploy:
+#   stage: deploy
+#   image: 
+#     name: bitnami/kubectl
+#     entrypoint: [""]  
+#   script:
+#     - kubectl get deployment demo-golang-docker || kubectl create deployment demo-golang-docker --image="$CI_REGISTRY_IMAGE":0.0.2.SNAPSHOT
+#     - kubectl set image deployment/demo-golang-docker demo-golang-docker="$CI_REGISTRY_IMAGE":0.0.2.SNAPSHOT
+
+# deploy_review:
+#     stage: deploy
+#     image: devth/helm
+#     script:
+#         - helm version
+#         - helm init
+#         - helm upgrade
+#           --install
+#           --wait
+#           --force
+#           demo-golang-docker
+#           ./charts
