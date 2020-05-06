@@ -1,6 +1,6 @@
 # Demo Docker & Golang
 
-## Docker 
+[![Go Report Card](https://goreportcard.com/badge/github.com/pablosilvab/demo-golang-docker)](https://goreportcard.com/report/github.com/pablosilvab/demo-golang-docker)
 
 ### Ejecutar proyecto de forma local
 
