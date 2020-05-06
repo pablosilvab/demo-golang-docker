@@ -48,7 +48,7 @@ func main() {
 
 	// Start Server
 	go func() {
-		log.Println("Starting Server")
+		log.Println("Starting Server on port 8080")
 		if err := srv.ListenAndServe(); err != nil {
 			log.Fatal(err)
 		}
