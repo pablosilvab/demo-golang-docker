@@ -1,8 +1,6 @@
 # Demo Docker & Golang
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/pablosilvab/demo-golang-docker)](https://goreportcard.com/report/github.com/pablosilvab/demo-golang-docker)
-
-[![Build Status](https://travis-ci.org/pablosilvab/demo-golang-docker.svg?branch=master)](https://travis-ci.org/pablosilvab/demo-golang-docker)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pablosilvab/demo-golang-docker)](https://goreportcard.com/report/github.com/pablosilvab/demo-golang-docker) [![Build Status](https://travis-ci.org/pablosilvab/demo-golang-docker.svg?branch=master)](https://travis-ci.org/pablosilvab/demo-golang-docker)
 
 El objetivo de este proyecto es realizar pruebas con distintas herramientas de CI/CD para una aplicación desarrollada en Go.
 
