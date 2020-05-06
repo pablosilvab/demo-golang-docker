@@ -2,6 +2,8 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/pablosilvab/demo-golang-docker)](https://goreportcard.com/report/github.com/pablosilvab/demo-golang-docker)
 
+El objetivo de este proyecto es realizar pruebas con distintas herramientas de CI/CD para una aplicación desarrollada en Go.
+
 ### Ejecutar proyecto de forma local
 
 1. Clonar proyecto en directorio.
@@ -58,27 +60,6 @@ make docker-tag
 
 ```
 make docker-run
-```
-
-
-## Kubernetes 
-
-* Deployment 
-
-```
-kubectl apply -f deployments/00-deploy.yaml
-```
-
-* Service 
-
-```
-kubectl apply -f deployments/01-service.yaml
-```
-
-* Expose 
-
-```
-kubectl expose deployment golang-docker-deployment --type=LoadBalancer --port=8080
 ```
 
 ## Helm 
