@@ -20,7 +20,12 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		name = "Guest"
 	}
 	log.Printf("Received request for %s\n", name)
-	w.Write([]byte(fmt.Sprintf("Hello, %s\n", name)))
+
+	_, err := w.Write([]byte(fmt.Sprintf("Hello, %s\n", name)))
+
+	if err != nil {
+		os.Exit(0)
+	}
 }
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
@@ -68,7 +73,7 @@ func waitForShutdown(srv *http.Server) {
 	// Create a deadline to wait for.
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
 	defer cancel()
-	srv.Shutdown(ctx)
+	_ = srv.Shutdown(ctx)
 
 	log.Println("Shutting down")
 	os.Exit(0)
