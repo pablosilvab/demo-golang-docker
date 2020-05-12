@@ -1,6 +1,5 @@
 
 FROM golang:latest as builder
-LABEL maintainer="Pablo Silva <pablonicolassilvabravo@gmail.com>"
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
