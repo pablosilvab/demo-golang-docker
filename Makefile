@@ -11,7 +11,7 @@ helm-upgrade:
 	helm upgrade demo-golang-docker  ./charts
 
 helm-install:
-	helm install --set name=demo-golang-docker demo-golang-docker ./charts
+	helm install demo-golang-docker ./charts
  
 docker-push:
 	docker build -t ${USER_HUB}/${APP_NAME}:${APP_VERSION} .
