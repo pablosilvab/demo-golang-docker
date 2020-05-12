@@ -12,9 +12,6 @@ helm-upgrade:
 helm-install:
 	helm install --set name=demo-golang-docker demo-golang-docker ./charts
  
-deploy-local:
-	kubectl run hello-world-golang --image=${USER_HUB}/${APP_NAME}:${APP_VERSION} --restart=Never --port=${PORT}
-
 docker-push:
 	docker build -t ${USER_HUB}/${APP_NAME}:${APP_VERSION} .
 	docker push ${USER_HUB}/${APP_NAME}:${APP_VERSION}
@@ -34,4 +31,12 @@ go-build:
 go-shell:
 	./build/${APP_NAME}
 
+# To play with Minikube
+deploy-local:
+	kubectl run hello-world-golang --image=${USER_HUB}/${APP_NAME}:${APP_VERSION} --restart=Never --port=${PORT}
 
+expose-local:
+	kubectl expose pod hello-world-golang --type=LoadBalancer 
+
+get-ip-svc:
+	minikube service hello-world-golang
