@@ -8,7 +8,7 @@ image:
   repository: pablon27/demo-golang-docker
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart version.
-  tag: "0.0.2.SNAPSHOT"
+  tag: "0.0.1.SNAPSHOT"
 
 imagePullSecrets: []
 nameOverride: ""

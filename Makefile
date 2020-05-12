@@ -37,7 +37,7 @@ go-shell:
 
 # To play with Minikube
 deploy-local:
-	kubectl run hello-world-golang --image=${USER_HUB}/${APP_NAME}:${APP_VERSION} --restart=Never --port=${PORT}
+	kubectl run hello-world-golang --image=${USER_HUB}/${APP_NAME} --restart=Never --port=${PORT}
 
 expose-local:
 	kubectl expose pod hello-world-golang --type=LoadBalancer 
