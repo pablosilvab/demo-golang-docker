@@ -2,6 +2,7 @@ APP_NAME = demo-golang-docker
 APP_VERSION = 0.0.1.SNAPSHOT
 USER_HUB = pablon27
 PORT = 8080
+GIT_DIR=$(shell pwd)
 
 helm-uninstall:
 	helm uninstall demo-golang-docker
@@ -17,10 +18,13 @@ docker-push:
 	docker push ${USER_HUB}/${APP_NAME}:${APP_VERSION}
 
 docker-build: 
-	docker build -t ${USER_HUB}/${APP_NAME}:${APP_VERSION} .
+	docker build -t ${APP_NAME}:${APP_VERSION} .
+
+docker-shell:
+	docker run -it --rm -v $(GIT_DIR):/app -p ${PORT}:8080  -w /app/ --entrypoint=/bin/sh ${APP_NAME}:${APP_VERSION}
 
 docker-run:
-	docker run -p ${PORT}:8080 ${USER_HUB}/${APP_NAME}:${APP_VERSION}
+	docker run -p ${PORT}:8080 ${APP_NAME}:${APP_VERSION}
 
 go-run:
 	go run cmd/main.go
