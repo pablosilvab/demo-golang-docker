@@ -73,18 +73,12 @@ make docker-run
 
 Instalar paquete en Kubernetes: 
 ```
-helm install --name demo-golang-docker ./charts/
-helm install --replace --name demo-golang-docker ./charts 
+make helm-install
 ```
 
 Eliminar release de Kubernetes:
 ```
-helm delete demo-golang-docker
-```
-
-Reinstalar release:
-```
-helm delete demo-golang-docker && helm install --replace --name demo-golang-docker
+make helm-uninstall
 ```
 
 Listar releases:
