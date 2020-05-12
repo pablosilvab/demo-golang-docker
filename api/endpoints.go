@@ -1,11 +1,18 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 )
+
+// User -> struct to represent users
+type User struct {
+	Name string
+	Age  int
+}
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
@@ -20,6 +27,56 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		os.Exit(0)
 	}
+}
+
+func getUsers(w http.ResponseWriter, r *http.Request) {
+
+	// Dummy users
+	users := []User{
+		{
+			Name: "Pablo",
+			Age:  26,
+		},
+		{
+			Name: "Maria",
+			Age:  26,
+		},
+	}
+	log.Println(users)
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(users)
+}
+
+func getUser(w http.ResponseWriter, r *http.Request) {
+
+	// Dummy user
+	user := User{
+		Name: "Pablo",
+		Age:  26,
+	}
+	log.Printf("Decoding Data: %v", user)
+
+	// Encoding data
+	userData, _ := json.Marshal(user)
+	log.Printf("Encoding Data: %v", userData)
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(userData)
+}
+
+func getLastUser(w http.ResponseWriter, r *http.Request) {
+	// Decoding data
+	var user User
+	b := []byte(`{"Name":"Pablo","Age":26}`)
+	log.Printf("Encoding Data: %v", b)
+
+	err := json.Unmarshal(b, &user)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+	log.Printf("Decoding Data: %v", user)
+	w.Write(b)
 }
 
 func readinessHandler(w http.ResponseWriter, r *http.Request) {
