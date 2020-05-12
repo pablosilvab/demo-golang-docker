@@ -6,12 +6,23 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
+
+	"github.com/pablosilvab/elastic-lib"
 )
+
+const APP_NAME = "demo-golang-docker"
 
 // User -> struct to represent users
 type User struct {
 	Name string
 	Age  int
+}
+
+// Log -> struct to write logs in Elasticsearch
+type Log struct {
+	Endpoint  string
+	Timestamp time.Time
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -30,7 +41,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getUsers(w http.ResponseWriter, r *http.Request) {
-
+	go elastic.Log(APP_NAME, Log{r.RequestURI, time.Now()})
 	// Dummy users
 	users := []User{
 		{
