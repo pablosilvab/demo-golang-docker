@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -10,39 +9,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gorilla/mux"
+	"github.com/pablosilvab/demo-golang-docker/api"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query()
-	name := query.Get("name")
-	if name == "" {
-		name = "Guest"
-	}
-	log.Printf("Received request for %s\n", name)
-
-	_, err := w.Write([]byte(fmt.Sprintf("Hello, %s\n", name)))
-
-	if err != nil {
-		os.Exit(0)
-	}
-}
-
-func healthHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-}
-
-func readinessHandler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-}
-
 func main() {
-	// Create Server and Route Handlers
-	r := mux.NewRouter()
 
-	r.HandleFunc("/", handler)
-	r.HandleFunc("/health", healthHandler)
-	r.HandleFunc("/ready", readinessHandler)
+	r := api.InitRouter()
 
 	srv := &http.Server{
 		Handler:      r,
