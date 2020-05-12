@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/pablosilvab/demo-golang-docker/api"
+	"github.com/pablosilvab/demo-golang-docker/healthcheck"
 )
 
 func TestHealthCheckHandler(t *testing.T) {
@@ -18,7 +18,7 @@ func TestHealthCheckHandler(t *testing.T) {
 
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(api.HealthHandler)
+	handler := http.HandlerFunc(healthcheck.HealthHandler)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.

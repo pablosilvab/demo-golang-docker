@@ -1,13 +1,16 @@
 package api
 
-import "github.com/gorilla/mux"
+import (
+	"github.com/gorilla/mux"
+	"github.com/pablosilvab/demo-golang-docker/healthcheck"
+)
 
+// InitRouter : Return a router instance with paths.
 func InitRouter() *mux.Router {
-	// Create Server and Route Handlers
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", handler).Methods("GET")
-	r.HandleFunc("/health", HealthHandler).Methods("GET")
+	r.HandleFunc("/health", healthcheck.HealthHandler).Methods("GET")
 	r.HandleFunc("/ready", readinessHandler).Methods("GET")
 	return r
 }
