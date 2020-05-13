@@ -27,7 +27,7 @@ func GetClients(w http.ResponseWriter, r *http.Request) {
 	log.Println(clients)
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(clients)
+	_ = json.NewEncoder(w).Encode(clients)
 }
 
 // GetUsers return json users
@@ -47,7 +47,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	log.Println(users)
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(users)
+	_ = json.NewEncoder(w).Encode(users)
 }
 
 // GetUser return user data in a encoding data example
@@ -65,7 +65,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Encoding Data: %v", userData)
 
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(userData)
+	_, _ = w.Write(userData)
 }
 
 // GetLastUser return encoding data. also there is an example of decoding.
@@ -80,5 +80,5 @@ func GetLastUser(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 	log.Printf("Decoding Data: %v", user)
-	w.Write(b)
+	_, _ = w.Write(b)
 }
