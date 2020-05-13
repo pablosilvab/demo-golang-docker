@@ -9,8 +9,10 @@ import (
 	"github.com/pablosilvab/elastic-lib"
 )
 
+// AppName -> index to Elasticsearch
 const AppName = "demo-golang-docker"
 
+// GetClients return json clients
 func GetClients(w http.ResponseWriter, r *http.Request) {
 	go elastic.Log(AppName, Log{r.RequestURI, time.Now()})
 	// Dummy users
@@ -28,6 +30,7 @@ func GetClients(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(clients)
 }
 
+// GetUsers return json users
 func GetUsers(w http.ResponseWriter, r *http.Request) {
 	go elastic.Log(AppName, Log{r.RequestURI, time.Now()})
 	// Dummy users
@@ -47,6 +50,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(users)
 }
 
+// GetUser return user data in a encoding data example
 func GetUser(w http.ResponseWriter, r *http.Request) {
 
 	// Dummy user
@@ -64,6 +68,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	w.Write(userData)
 }
 
+// GetLastUser return encoding data. also there is an example of decoding.
 func GetLastUser(w http.ResponseWriter, r *http.Request) {
 	// Decoding data
 	var user User

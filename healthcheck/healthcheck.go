@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// HealthHandler is a endpoint to check the health of the app
 func HealthHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
