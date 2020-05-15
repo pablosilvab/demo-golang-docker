@@ -32,8 +32,10 @@ func GetClients(w http.ResponseWriter, r *http.Request) {
 
 // GetUsers return json users
 func GetUsers(w http.ResponseWriter, r *http.Request) {
-	go elastic.Log(AppName, Log{r.RequestURI, time.Now()})
-	// Dummy users
+
+	// TODO: create cloud queue
+	// go elastic.Log(AppName, Log{r.RequestURI, time.Now()})
+
 	users := []User{
 		{
 			Name: "Pablo",
