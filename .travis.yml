@@ -8,10 +8,8 @@ before_install:
   - docker build -t pablon27/demo-golang-docker .
 
 script:
-  - docker run -e CI=true pablon27/demo-golang-docker 
-  - golangci-lint run       # run a bunch of code checkers/linters in parallel
-  - go test -v -race ./test  # Run all the tests with the race detector enabled
-
+  - docker run -e CI=true pablon27/demo-golang-docker golangci-lint run go test -v -race ./test 
+  
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
