@@ -7,8 +7,6 @@ services:
 before_install:
   - docker build -t pablon27/demo-golang-docker .
 
-script:
-  - docker run -e CI=true pablon27/demo-golang-docker go test -v -race ./test 
 
 deploy:
   provider: elasticbeanstalk
