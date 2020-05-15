@@ -11,6 +11,9 @@ install: true
 notifications:
   email: false
 
+services:
+  - docker
+
 before_script:
   - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.25.1
 
@@ -27,11 +30,10 @@ deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
   app: "docker"
-  env: "Docker-env"
+  env: "docker-env"
   bucket_name: "elasticbeanstalk-us-east-2-514473135315"
   bucket_path: "docker"
   on:
     branch: master
-  access_key_id: "$AWS_ACCESS_KEY"
-  secret_access_key: 
-    secure: "$AWS_SECRET_KEY"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
