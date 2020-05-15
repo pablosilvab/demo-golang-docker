@@ -22,3 +22,16 @@ after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
   - docker tag demo-golang-docker $DOCKER_USER/demo-golang-docker:$TRAVIS_BUILD_ID
   - docker push $DOCKER_USER/demo-golang-docker:$TRAVIS_BUILD_ID
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-east-2-514473135315"
+  bucket_path: "docker"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
