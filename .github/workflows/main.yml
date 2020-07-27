@@ -28,9 +28,3 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: pablon27/demo-golang-github-actions
           tags: latest
-
-      - name: Assign issues to project
-        uses: technote-space/create-project-card-action@v1
-        with:
-          PROJECT: Backlog
-          COLUMN: To do
