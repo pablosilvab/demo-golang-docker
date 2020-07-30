@@ -4,9 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"time"
-
-	"github.com/pablosilvab/elastic-lib"
 )
 
 // AppName -> index to Elasticsearch
@@ -14,7 +11,6 @@ const AppName = "demo-golang-docker"
 
 // GetClients return json clients
 func GetClients(w http.ResponseWriter, r *http.Request) {
-	go elastic.Log(AppName, Log{r.RequestURI, time.Now()})
 	// Dummy users
 	clients := []Client{
 		{
@@ -32,9 +28,6 @@ func GetClients(w http.ResponseWriter, r *http.Request) {
 
 // GetUsers return json users
 func GetUsers(w http.ResponseWriter, r *http.Request) {
-
-	// TODO: create cloud queue
-	// go elastic.Log(AppName, Log{r.RequestURI, time.Now()})
 
 	users := []User{
 		{
