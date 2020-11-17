@@ -1,8 +1,9 @@
-APP_NAME = demo-golang-docker
-APP_VERSION = 0.0.1.SNAPSHOT
-USER_HUB = pablon27
+IMAGE_NAME = demo-golang-docker
+IMAGE_VERSION = 0.0.2
+IMAGE_REGISTRY = pablon27
 PORT = 8080
 GIT_DIR=$(shell pwd)
+IMAGE_TAG=$(IMAGE_NAME):$(IMAGE_VERSION)
 
 helm-uninstall:
 	helm uninstall demo-golang-docker
@@ -12,32 +13,30 @@ helm-upgrade:
 
 helm-install:
 	helm install demo-golang-docker ./charts
- 
+
 docker-push:
-	docker build -t ${USER_HUB}/${APP_NAME}:${APP_VERSION} .
-	docker push ${USER_HUB}/${APP_NAME}:${APP_VERSION}
+	docker build -t ${IMAGE_TAG} .
+	docker tag $(IMAGE_TAG) $(IMAGE_REGISTRY)/$(IMAGE_TAG)
+	docker push ${IMAGE_REGISTRY}/${IMAGE_TAG}
 
 docker-build: 
-	docker build -t ${APP_NAME}:${APP_VERSION} .
-
-docker-shell:
-	docker run -it --rm -v $(GIT_DIR):/app -p ${PORT}:8080  -w /app/ --entrypoint=/bin/sh ${APP_NAME}:${APP_VERSION}
+	docker build -t ${IMAGE_TAG} .
 
 docker-run:
-	docker run -p ${PORT}:8080 ${APP_NAME}:${APP_VERSION}
+	docker run -p ${PORT}:8080 ${IMAGE_TAG}
 
 go-run:
 	go run cmd/main.go
 
 go-build:
-	go build -o ./build/${APP_NAME} ./cmd/main.go
+	go build -o ./build/${IMAGE_NAME} ./cmd/main.go
 
 go-shell:
-	./build/${APP_NAME}
+	./build/${IMAGE_NAME}
 
 # To play with Minikube
 deploy-local:
-	kubectl run hello-world-golang --image=${USER_HUB}/${APP_NAME} --restart=Never --port=${PORT}
+	kubectl run hello-world-golang --image=${IMAGE_REGISTRY}/${IMAGE_TAG} --restart=Never --port=${PORT}
 
 expose-local:
 	kubectl expose pod hello-world-golang --type=LoadBalancer 
