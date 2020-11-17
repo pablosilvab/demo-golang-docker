@@ -22,5 +22,5 @@ after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
   - docker tag demo-golang-docker-travis $DOCKER_USER/demo-golang-docker-travis:$TRAVIS_BUILD_ID
   - docker push $DOCKER_USER/demo-golang-docker-travis:$TRAVIS_BUILD_ID
-  - docker tag demo-golang-docker $DOCKER_USER/demo-golang-docker-travis:latest
+  - docker tag demo-golang-docker-travis $DOCKER_USER/demo-golang-docker-travis:latest
   - docker push $DOCKER_USER/demo-golang-docker-travis:latest
