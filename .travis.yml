@@ -1,16 +1,15 @@
-dist: trusty
+language: go
+go:
+  - 1.14.x
 
-jobs:
-  include:
-    - stage: build docker image
-      script:
-      - golangci-lint run       # run a bunch of code checkers/linters in parallel
-      - go test -v -race ./test  # Run all the tests with the race detector enabled
-      - docker build -t demo-golang-docker-travis .
-    - stage: push docker image
-      script:
-      - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - docker tag demo-golang-docker-travis $DOCKER_USER/demo-golang-docker-travis:$TRAVIS_BUILD_ID
-      - docker push $DOCKER_USER/demo-golang-docker-travis:$TRAVIS_BUILD_ID
-      - docker tag demo-golang-docker-travis $DOCKER_USER/demo-golang-docker-travis:latest
-      - docker push $DOCKER_USER/demo-golang-docker-travis:latest
+services: 
+  - docker
+
+script:
+  - docker build -t demo-golang-docker-travis .
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+  - docker tag demo-golang-docker-travis $DOCKER_USER/demo-golang-docker-travis:$TRAVIS_BUILD_ID
+  - docker push $DOCKER_USER/demo-golang-docker-travis:$TRAVIS_BUILD_ID
+  - docker tag demo-golang-docker-travis $DOCKER_USER/demo-golang-docker-travis:latest
+  - docker push $DOCKER_USER/demo-golang-docker-travis:latest
