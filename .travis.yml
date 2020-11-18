@@ -18,9 +18,9 @@ script:
   - golangci-lint run       # run a bunch of code checkers/linters in parallel
   - go test -v -race ./test  # Run all the tests with the race detector enabled
   - docker build -t demo-golang-docker .
-# after_success:
-#   - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-#   - docker tag demo-golang-docker $DOCKER_USER/demo-golang-docker:$TRAVIS_BUILD_ID
-#   - docker push $DOCKER_USER/demo-golang-docker:$TRAVIS_BUILD_ID
-#   - docker tag demo-golang-docker $DOCKER_USER/demo-golang-docker:latest
-#   - docker push $DOCKER_USER/demo-golang-docker:latest
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+  - docker tag demo-golang-docker $DOCKER_USER/demo-golang-docker:$TRAVIS_BUILD_ID
+  - docker push $DOCKER_USER/demo-golang-docker:$TRAVIS_BUILD_ID
+  - docker tag demo-golang-docker $DOCKER_USER/demo-golang-docker:latest
+  - docker push $DOCKER_USER/demo-golang-docker:latest
