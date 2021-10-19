@@ -6,9 +6,9 @@ name: build
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ develop ]
   pull_request:
-    branches: [ master ]
+    branches: [ develop ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,10 +21,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build and push Docker images
+      - name: Build and push Docker image
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: pablon27/demo-golang-docker-github
+          repository: pablon27/demo-golang-docker
           tags: latest
+
+      - name: Release 
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "release.tar.gz"
+          tag: 0.0.1
+          token: ${{ secrets.GITHUB_TOKEN }}
