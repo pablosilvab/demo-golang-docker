@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: pablon27/demo-golang-docker
-          tags: latest
+          tags: 0.0.1
 
       - name: Release 
         uses: ncipollo/release-action@v1
