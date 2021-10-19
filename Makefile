@@ -1,5 +1,5 @@
 IMAGE_NAME = demo-golang-docker
-IMAGE_VERSION = 0.0.2
+IMAGE_VERSION = 0.0.3
 IMAGE_REGISTRY = pablon27
 PORT = 8080
 GIT_DIR=$(shell pwd)
