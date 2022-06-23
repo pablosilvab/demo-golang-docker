@@ -4,76 +4,99 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
+
+	"github.com/pablosilvab/elastic"
 )
 
 // AppName -> index to Elasticsearch
 const AppName = "demo-golang-docker"
 
-// GetClients return json clients
-func GetClients(w http.ResponseWriter, r *http.Request) {
-	// Dummy users
-	clients := []Client{
-		{
-			Person: User{Name: "Pablo", Age: 26}, Enabled: true,
-		},
-		{
-			Person: User{Name: "Maria", Age: 26}, Enabled: false,
-		},
-	}
-	log.Println(clients)
+type allUsers []User
 
-	w.Header().Set("Content-Type", "application/json")
-	_ = json.NewEncoder(w).Encode(clients)
+var users = allUsers{
+	{
+		Id:            1,
+		Name:          "Pablo",
+		Age:           26,
+		InsertionDate: time.Now(),
+	},
+	{
+		Id:            2,
+		Name:          "Maria",
+		Age:           26,
+		InsertionDate: time.Now(),
+	},
+	{
+		Id:            3,
+		Name:          "Tony",
+		Age:           46,
+		InsertionDate: time.Now(),
+	},
 }
 
 // GetUsers return json users
 func GetUsers(w http.ResponseWriter, r *http.Request) {
+	initTime := time.Now()
 
-	users := []User{
-		{
-			Name: "Pablo",
-			Age:  26,
-		},
-		{
-			Name: "Maria",
-			Age:  26,
-		},
-	}
-	log.Println(users)
+	elastic.Log(AppName, Log{
+		AppName,
+		r.RemoteAddr,
+		r.RequestURI,
+		r.Method,
+		time.Since(initTime).Milliseconds(),
+		http.StatusOK,
+		time.Now()})
 
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).Encode(users)
+
 }
 
 // GetUser return user data in a encoding data example
 func GetUser(w http.ResponseWriter, r *http.Request) {
-
-	// Dummy user
-	user := User{
-		Name: "Pablo",
-		Age:  26,
-	}
-	log.Printf("Decoding Data: %v", user)
-
-	// Encoding data
-	userData, _ := json.Marshal(user)
-	log.Printf("Encoding Data: %v", userData)
+	initTime := time.Now()
 
 	w.Header().Set("Content-Type", "application/json")
-	_, _ = w.Write(userData)
+
+	userId := 1
+
+	for _, user := range users {
+		if user.Id == userId {
+			json.NewEncoder(w).Encode(user)
+
+			elastic.Log(AppName, Log{
+				AppName,
+				r.RemoteAddr,
+				r.RequestURI,
+				r.Method,
+				time.Since(initTime).Milliseconds(),
+				http.StatusOK,
+				time.Now()})
+			return
+		}
+	}
+
+	elastic.Log(AppName, Log{
+		AppName,
+		r.RemoteAddr,
+		r.RequestURI,
+		r.Method,
+		time.Since(initTime).Milliseconds(),
+		http.StatusNotFound,
+		time.Now()})
+
+	sendResponse(w, "User Not Found", http.StatusNotFound)
 }
 
-// GetLastUser return encoding data. also there is an example of decoding.
-func GetLastUser(w http.ResponseWriter, r *http.Request) {
-	// Decoding data
-	var user User
-	b := []byte(`{"Name":"Pablo","Age":26}`)
-	log.Printf("Encoding Data: %v", b)
-
-	err := json.Unmarshal(b, &user)
+func sendResponse(w http.ResponseWriter, message string, status int) {
+	w.WriteHeader(status)
+	resp := make(map[string]string)
+	resp["message"] = message
+	jsonResp, err := json.Marshal(resp)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
+		log.Fatalf("Error happened in JSON marshal. Err: %s", err)
 	}
-	log.Printf("Decoding Data: %v", user)
-	_, _ = w.Write(b)
+
+	w.Write(jsonResp)
 }

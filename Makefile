@@ -37,6 +37,10 @@ go-build:
 go-shell:
 	./build/${IMAGE_NAME}
 
+go-download:
+	export GO111MODULE=on
+	go mod download
+
 # To play with Minikube
 deploy-local:
 	kubectl run hello-world-golang --image=${IMAGE_REGISTRY}/${IMAGE_TAG} --restart=Never --port=${PORT}
