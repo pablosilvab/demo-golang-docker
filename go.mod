@@ -1,9 +1,8 @@
 module github.com/pablosilvab/demo-golang-docker
 
-go 1.14
+go 1.15
 
 require (
-	github.com/elastic/go-elasticsearch v0.0.0 // indirect
-	github.com/gorilla/mux v1.7.4
-	github.com/pablosilvab/elastic-lib v0.0.0-20200427001637-23f486d27f9a
+	github.com/gorilla/mux v1.8.0
+	github.com/pablosilvab/elastic v0.0.0-20220623202425-556315da88a6
 )
