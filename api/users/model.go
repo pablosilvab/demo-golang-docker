@@ -6,7 +6,7 @@ import (
 
 // User -> struct to represent users
 type User struct {
-	Id            int       `json:"id"`
+	Id            string    `json:"id"`
 	Name          string    `json:"name"`
 	Age           int       `json:"age"`
 	InsertionDate time.Time `json:"insertion_date"`

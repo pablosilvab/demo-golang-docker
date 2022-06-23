@@ -16,19 +16,19 @@ type allUsers []User
 
 var users = allUsers{
 	{
-		Id:            1,
+		Id:            "1",
 		Name:          "Pablo",
 		Age:           26,
 		InsertionDate: time.Now(),
 	},
 	{
-		Id:            2,
+		Id:            "2",
 		Name:          "Maria",
 		Age:           26,
 		InsertionDate: time.Now(),
 	},
 	{
-		Id:            3,
+		Id:            "3",
 		Name:          "Tony",
 		Age:           46,
 		InsertionDate: time.Now(),
@@ -54,12 +54,12 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetUser return user data in a encoding data example
-func GetUser(w http.ResponseWriter, r *http.Request) {
+func GetUser(w http.ResponseWriter, r *http.Request, id string) {
 	initTime := time.Now()
 
 	w.Header().Set("Content-Type", "application/json")
 
-	userId := 1
+	userId := id
 
 	for _, user := range users {
 		if user.Id == userId {
