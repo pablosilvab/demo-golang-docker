@@ -1,6 +1,6 @@
 # Demo Docker & Golang
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/pablosilvab/demo-golang-docker)](https://goreportcard.com/report/github.com/pablosilvab/demo-golang-docker) [![Build Travis Status](https://travis-ci.org/pablosilvab/demo-golang-docker.svg?branch=master)](https://travis-ci.org/pablosilvab/demo-golang-docker) [![Build Actions Status](https://github.com/pablosilvab/demo-golang-docker/workflows/build/badge.svg)](https://github.com/pablosilvab/demo-golang-docker/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pablosilvab/demo-golang-docker)](https://goreportcard.com/report/github.com/pablosilvab/demo-golang-docker) [![Build Actions Status](https://github.com/pablosilvab/demo-golang-docker/workflows/build/badge.svg)](https://github.com/pablosilvab/demo-golang-docker/actions)
 
 
 This is a simple API for testing different tools.
