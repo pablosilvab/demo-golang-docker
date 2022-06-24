@@ -1,63 +1,62 @@
 # Demo Docker & Golang
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/pablosilvab/demo-golang-docker)](https://goreportcard.com/report/github.com/pablosilvab/demo-golang-docker) [![Build Travis Status](https://travis-ci.org/pablosilvab/demo-golang-docker.svg?branch=master)](https://travis-ci.org/pablosilvab/demo-golang-docker) [![Build Actions Status](https://github.com/pablosilvab/demo-golang-docker/workflows/build/badge.svg)](https://github.com/pablosilvab/demo-golang-docker/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pablosilvab/demo-golang-docker)](https://goreportcard.com/report/github.com/pablosilvab/demo-golang-docker) [![Build Actions Status](https://github.com/pablosilvab/demo-golang-docker/workflows/build/badge.svg)](https://github.com/pablosilvab/demo-golang-docker/actions)
 
 
-El objetivo de este proyecto es realizar pruebas con distintas herramientas de CI/CD para una aplicación desarrollada en Go.
+This is a simple API for testing different tools.
+### Run project locally
 
-### Ejecutar proyecto de forma local
-
-1. Clonar proyecto en directorio.
+1. Clone project
 
 ```
 go get github.com/pablosilvab/golang-docker
 ```
 
-2. Entrar en directorio 
+2. Go to folder
 
 ```
 cd ~/go/src/github.com/pablosilvab/golang-docker
 ```
 
-3. Descargar dependencias 
+3. Download dependencies
 
 ```
 go mod download
 ```
 
-4. Ejecutar proyecto
+4. Run project locally
 
 ```
 make go-run
 ```
 
-5. Generar archivo binario
+5. Compile the code and generate an executable 
 
 ```
 make go-build
 ```
 
-6. Ejecutar archivo binario
+6. Run the executable
 
 ```
 make go-shell
 ```
 
-### Ejecutar mediante contenedor local
+### Run with Docker
 
-* Construir imagen Docker 
+* Build new image 
 
 ```
 make docker-build
 ```
 
-* Tag 
+* Generate tag 
 
 ```
 make docker-tag
 ```
 
-* Run
+* Run container
 
 ```
 make docker-run
@@ -65,24 +64,23 @@ make docker-run
 
 ## Helm 
 
-### Requisitos
+### Requirements
 
-* Tener Helm instaldo en tu máquina.
-* Tener Tiller instalado en tu cluster.
-* El usuario debe tener permisos para poder desplegar.
+* Helm
+* Tiller
 
 
-Instalar paquete en Kubernetes: 
+Install package in Kubernetes: 
 ```
 make helm-install
 ```
 
-Eliminar release de Kubernetes:
+Remove release in Kubernetes:
 ```
 make helm-uninstall
 ```
 
-Listar releases:
+List all releases:
 ```
 helm ls --all
 ```
@@ -93,15 +91,15 @@ helm ls --all
 
 * Cannot connect to the Docker daemon at tcp://localhost:2375. Is the docker daemon running?
 
-Revisar archivo ```.gitlab-ci.yml```. Las versiones son importantes, tanto la imagen Docker como las variables definidas.
+Review  ```.gitlab-ci.yml``` file. 
 
 ### Helm install
 
 * User "system:serviceaccount:default:default" cannot get at the cluster 
 
-Conceder permisos con un ```ClusterRoleBinding```.
+Grant permissions with ```ClusterRoleBinding```.
 
-### Creación de charts
+### How create charts?
 
 ```
 helm create charts
