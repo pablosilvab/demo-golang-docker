@@ -2,5 +2,5 @@ github.com/elastic/go-elasticsearch/v7 v7.17.1 h1:49mHcHx7lpCL8cW1aioEwSEVKQF3s+
 github.com/elastic/go-elasticsearch/v7 v7.17.1/go.mod h1:OJ4wdbtDNk5g503kvlHLyErCgQwwzmDtaFC4XyOxXA4=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=
 github.com/gorilla/mux v1.8.0/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
-github.com/pablosilvab/elastic v0.0.0-20220623202425-556315da88a6 h1:mBKWJfRchj2d8QnnN6EkRtoHiZ+JoKbY28xrWU0oDXU=
-github.com/pablosilvab/elastic v0.0.0-20220623202425-556315da88a6/go.mod h1:ePAQZychuV2qTNkskWAEJMqUfD11GqroY7NMmShLd3A=
+github.com/pablosilvab/elastic v0.1.0 h1:1ZByYD1f0P05KII3GCFhF0uaEykzHm+2O6bJENLXucM=
+github.com/pablosilvab/elastic v0.1.0/go.mod h1:8VzXNblASW8b6hLmEcNj0wydehjHWksDKi7FiQfk7w8=

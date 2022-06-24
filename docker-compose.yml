@@ -1,0 +1,29 @@
+
+services:
+  demo-golang-docker:
+    container_name: app
+    build: 
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      - ELASTIC_URL=http://elasticsearch:9200
+    links:
+      - elasticsearch
+    networks:
+      - backend
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node 
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
