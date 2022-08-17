@@ -4,6 +4,12 @@
 
 
 This is a simple API for testing different tools.
+
+![golang]
+![docker]
+![kubernetes]
+![elastic]
+
 ### Run project locally
 
 1. Clone project
@@ -104,3 +110,36 @@ Grant permissions with ```ClusterRoleBinding```.
 ```
 helm create charts
 ```
+
+## Notes
+
+### Run elasticsearch in K8s.
+
+To run elasticsearch in K8s for this exercise I use helm
+
+1. Add repository elastic
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+```
+
+* Install helm chart
+```
+helm install elastic bitnami/elasticsearch
+```
+
+* Uninstall chart
+```
+helm delete --purge elastic
+```
+
+* Expose the service
+```
+kubectl port-forward --namespace default svc/elastic-elasticsearch 9200:9200 
+```
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[golang]: https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white
+[docker]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
+[kubernetes]: https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white
+[elastic]:https://img.shields.io/badge/-ElasticSearch-005571?style=for-the-badge&logo=elasticsearch

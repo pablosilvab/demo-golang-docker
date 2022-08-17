@@ -4,7 +4,7 @@ replicaCount: 1
 image:
   repository: pablon27/demo-golang-docker
   pullPolicy: IfNotPresent
-  tag: "0.0.1.SNAPSHOT"
+  tag: "0.0.1"
 
 imagePullSecrets: []
 nameOverride: ""
